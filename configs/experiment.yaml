@@ -1,0 +1,28 @@
+seed: 42
+
+data:
+  raw_path: data/raw/urls.csv
+  processed_path: data/processed/urls_processed.csv
+  split_dir: data/splits
+
+features:
+  analyzer: char
+  ngram_range: [3, 3]
+  lowercase: true
+  min_df: 1
+
+model:
+  type: logistic_regression
+  C: 1.0
+  max_iter: 1000
+  class_weight: balanced
+  threshold: 0.30
+
+bloom:
+  target_fpr: 0.01
+  hash_function: xxhash64
+  strategy: double_hashing
+
+benchmark:
+  num_queries: 100000
+  report_path: results/benchmark.json
