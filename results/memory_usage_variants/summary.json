@@ -1,0 +1,270 @@
+{
+  "input": "data\\urldata.csv\\urldata.csv",
+  "rows": 420464,
+  "positive_count": 75643,
+  "negative_count": 344821,
+  "train_count": 336371,
+  "seed": 42,
+  "target_fprs": [
+    0.005,
+    0.01,
+    0.05,
+    0.1
+  ],
+  "threshold_grid": [
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "backup_fpr_grid": [
+    0.001,
+    0.01
+  ],
+  "n_features": {
+    "cpp_trigram": [
+      4096,
+      8192,
+      16384
+    ],
+    "char_trigram_python": [
+      4096,
+      8192,
+      16384
+    ],
+    "word_default_python": [
+      4096,
+      16384,
+      65536
+    ]
+  },
+  "results_by_target_fpr": {
+    "0.005": {
+      "target_fpr": 0.005,
+      "standard_bloom": {
+        "memory_bytes": 104272,
+        "num_bits": 834173,
+        "num_hashes": 8,
+        "estimated_fpr": 0.0
+      },
+      "best_variants": {
+        "cpp_trigram": {
+          "threshold": 0.99,
+          "backup_fpr": 0.01,
+          "false_negatives": 20690,
+          "model_fp_rate": 0.002247542928069926,
+          "system_fpr": 0.002247542928069926,
+          "model_size_bytes": 65552,
+          "backup_bloom_memory_bytes": 24790,
+          "total_memory_bytes": 90342,
+          "n_features": 8192,
+          "meets_target": true,
+          "memory_mb": 0.08615684509277344,
+          "standard_memory_mb": 0.0994415283203125,
+          "memory_reduction_percent": 13.359291084854997
+        },
+        "char_trigram_python": {
+          "threshold": 0.99,
+          "backup_fpr": 0.01,
+          "false_negatives": 24904,
+          "model_fp_rate": 0.004834392336893634,
+          "system_fpr": 0.004834392336893634,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 29839,
+          "total_memory_bytes": 62615,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.059714317321777344,
+          "standard_memory_mb": 0.0994415283203125,
+          "memory_reduction_percent": 39.95032223415682
+        },
+        "word_default_python": {
+          "threshold": 0.9,
+          "backup_fpr": 0.01,
+          "false_negatives": 34635,
+          "model_fp_rate": 0.003477166413878505,
+          "system_fpr": 0.003477166413878505,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 41498,
+          "total_memory_bytes": 74274,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.07083320617675781,
+          "standard_memory_mb": 0.0994415283203125,
+          "memory_reduction_percent": 28.76898879852693
+        }
+      }
+    },
+    "0.01": {
+      "target_fpr": 0.01,
+      "standard_bloom": {
+        "memory_bytes": 90631,
+        "num_bits": 725043,
+        "num_hashes": 7,
+        "estimated_fpr": 0.0
+      },
+      "best_variants": {
+        "cpp_trigram": {
+          "threshold": 0.9,
+          "backup_fpr": 0.01,
+          "false_negatives": 12727,
+          "model_fp_rate": 0.007583644847616589,
+          "system_fpr": 0.007583644847616589,
+          "model_size_bytes": 65552,
+          "backup_bloom_memory_bytes": 15249,
+          "total_memory_bytes": 80801,
+          "n_features": 8192,
+          "meets_target": true,
+          "memory_mb": 0.0770578384399414,
+          "standard_memory_mb": 0.08643245697021484,
+          "memory_reduction_percent": 10.846178459908861
+        },
+        "char_trigram_python": {
+          "threshold": 0.95,
+          "backup_fpr": 0.01,
+          "false_negatives": 19202,
+          "model_fp_rate": 0.009851488163423922,
+          "system_fpr": 0.009851488163423922,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 23007,
+          "total_memory_bytes": 55783,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.053198814392089844,
+          "standard_memory_mb": 0.08643245697021484,
+          "memory_reduction_percent": 38.45041983427304
+        },
+        "word_default_python": {
+          "threshold": 0.8,
+          "backup_fpr": 0.01,
+          "false_negatives": 27826,
+          "model_fp_rate": 0.007458942465801097,
+          "system_fpr": 0.007458942465801097,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 33340,
+          "total_memory_bytes": 66116,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.06305313110351562,
+          "standard_memory_mb": 0.08643245697021484,
+          "memory_reduction_percent": 27.049243636283393
+        }
+      }
+    },
+    "0.05": {
+      "target_fpr": 0.05,
+      "standard_bloom": {
+        "memory_bytes": 58957,
+        "num_bits": 471652,
+        "num_hashes": 5,
+        "estimated_fpr": 0.0
+      },
+      "best_variants": {
+        "cpp_trigram": {
+          "threshold": 0.6,
+          "backup_fpr": 0.01,
+          "false_negatives": 11164,
+          "model_fp_rate": 0.04688809556262524,
+          "system_fpr": 0.04688809556262524,
+          "model_size_bytes": 32784,
+          "backup_bloom_memory_bytes": 13376,
+          "total_memory_bytes": 46160,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.0440216064453125,
+          "standard_memory_mb": 0.05622577667236328,
+          "memory_reduction_percent": 21.70564988042133
+        },
+        "char_trigram_python": {
+          "threshold": 0.5,
+          "backup_fpr": 0.01,
+          "false_negatives": 10232,
+          "model_fp_rate": 0.03590848585207977,
+          "system_fpr": 0.03590848585207977,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 12260,
+          "total_memory_bytes": 45036,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.042949676513671875,
+          "standard_memory_mb": 0.05622577667236328,
+          "memory_reduction_percent": 23.61212409043879
+        },
+        "word_default_python": {
+          "threshold": 0.5,
+          "backup_fpr": 0.01,
+          "false_negatives": 16694,
+          "model_fp_rate": 0.030053274017533736,
+          "system_fpr": 0.030053274017533736,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 20002,
+          "total_memory_bytes": 52778,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.05033302307128906,
+          "standard_memory_mb": 0.05622577667236328,
+          "memory_reduction_percent": 10.480519700798885
+        }
+      }
+    },
+    "0.1": {
+      "target_fpr": 0.1,
+      "standard_bloom": {
+        "memory_bytes": 45316,
+        "num_bits": 362522,
+        "num_hashes": 4,
+        "estimated_fpr": 0.0
+      },
+      "best_variants": {
+        "cpp_trigram": {
+          "threshold": 0.5,
+          "backup_fpr": 0.01,
+          "false_negatives": 10062,
+          "model_fp_rate": 0.054120833707923824,
+          "system_fpr": 0.054120833707923824,
+          "model_size_bytes": 32784,
+          "backup_bloom_memory_bytes": 12056,
+          "total_memory_bytes": 44840,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.04276275634765625,
+          "standard_memory_mb": 0.043216705322265625,
+          "memory_reduction_percent": 1.05040162415041
+        },
+        "char_trigram_python": {
+          "threshold": 0.5,
+          "backup_fpr": 0.01,
+          "false_negatives": 10232,
+          "model_fp_rate": 0.03590848585207977,
+          "system_fpr": 0.03590848585207977,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 12260,
+          "total_memory_bytes": 45036,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.042949676513671875,
+          "standard_memory_mb": 0.043216705322265625,
+          "memory_reduction_percent": 0.6178833083237745
+        },
+        "word_default_python": {
+          "threshold": 0.5,
+          "backup_fpr": 0.01,
+          "false_negatives": 16694,
+          "model_fp_rate": 0.030053274017533736,
+          "system_fpr": 0.030053274017533736,
+          "model_size_bytes": 32776,
+          "backup_bloom_memory_bytes": 20002,
+          "total_memory_bytes": 52778,
+          "n_features": 4096,
+          "meets_target": true,
+          "memory_mb": 0.05033302307128906,
+          "standard_memory_mb": 0.043216705322265625,
+          "memory_reduction_percent": -16.4665901668285
+        }
+      }
+    }
+  }
+}

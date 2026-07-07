@@ -32,12 +32,11 @@ compile_commands.json
 /data/processed/*
 !/data/processed/.gitkeep
 /data/splits/*
-!/data/splits/.gitkeep
-/results/*
-!/results/.gitkeep
+
 
 # Jupyter
 .ipynb_checkpoints/
 
 # VS Code
 .vscode/
+build.log

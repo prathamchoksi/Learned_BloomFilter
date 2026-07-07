@@ -1,0 +1,11 @@
+{
+  "input": "data\\urldata.csv\\urldata.csv",
+  "train_size": 336371,
+  "test_size": 84093,
+  "accuracy": 0.9753368294626188,
+  "roc_auc": 0.9926486871375324,
+  "weights_path": "results\\fused_model\\weights.bin",
+  "metadata_path": "results\\fused_model\\metadata.json",
+  "threshold": 0.5,
+  "n_features": 262144
+}

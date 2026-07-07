@@ -1,0 +1,718 @@
+{
+  "input": "data\\urldata.csv\\urldata.csv",
+  "seed": 42,
+  "target_fprs": [
+    0.01,
+    0.05
+  ],
+  "backup_fpr": 0.01,
+  "n_features": [
+    1024,
+    2048,
+    4096,
+    16384
+  ],
+  "thresholds": [
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    0.95,
+    0.99
+  ],
+  "results_by_target_fpr": {
+    "0.01": {
+      "1024": [
+        {
+          "n_features": 1024,
+          "threshold": 0.5,
+          "system_fpr": 0.06780349167681689,
+          "valid": false,
+          "backup_fn_count": 22520,
+          "backup_memory_bytes": 26982,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 35190,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.6,
+          "system_fpr": 0.06310538831854301,
+          "valid": false,
+          "backup_fn_count": 23769,
+          "backup_memory_bytes": 28479,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 36687,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.7,
+          "system_fpr": 0.05818978017516385,
+          "valid": false,
+          "backup_fn_count": 25115,
+          "backup_memory_bytes": 30092,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 38300,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.8,
+          "system_fpr": 0.05317266979873557,
+          "valid": false,
+          "backup_fn_count": 26790,
+          "backup_memory_bytes": 32098,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 40306,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.9,
+          "system_fpr": 0.04686503103068267,
+          "valid": false,
+          "backup_fn_count": 29230,
+          "backup_memory_bytes": 35022,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 43230,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.95,
+          "system_fpr": 0.041978423525317554,
+          "valid": false,
+          "backup_fn_count": 31414,
+          "backup_memory_bytes": 37639,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 45847,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.99,
+          "system_fpr": 0.034438257641668114,
+          "valid": false,
+          "backup_fn_count": 35839,
+          "backup_memory_bytes": 42940,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 51148,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        }
+      ],
+      "2048": [
+        {
+          "n_features": 2048,
+          "threshold": 0.5,
+          "system_fpr": 0.06950002900063801,
+          "valid": false,
+          "backup_fn_count": 13440,
+          "backup_memory_bytes": 16103,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 32503,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.6,
+          "system_fpr": 0.0623803723681921,
+          "valid": false,
+          "backup_fn_count": 14634,
+          "backup_memory_bytes": 17534,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 33934,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.7,
+          "system_fpr": 0.05517371382170408,
+          "valid": false,
+          "backup_fn_count": 15998,
+          "backup_memory_bytes": 19168,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 35568,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.8,
+          "system_fpr": 0.04828606229337046,
+          "valid": false,
+          "backup_fn_count": 17646,
+          "backup_memory_bytes": 21143,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 37543,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.9,
+          "system_fpr": 0.03991937822632098,
+          "valid": false,
+          "backup_fn_count": 20150,
+          "backup_memory_bytes": 24143,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 40543,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.95,
+          "system_fpr": 0.034293254451597935,
+          "valid": false,
+          "backup_fn_count": 22540,
+          "backup_memory_bytes": 27006,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 43406,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.99,
+          "system_fpr": 0.025738066237457224,
+          "valid": false,
+          "backup_fn_count": 27558,
+          "backup_memory_bytes": 33019,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 49419,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        }
+      ],
+      "4096": [
+        {
+          "n_features": 4096,
+          "threshold": 0.5,
+          "system_fpr": 0.057450263905805925,
+          "valid": false,
+          "backup_fn_count": 7900,
+          "backup_memory_bytes": 9466,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 42250,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.6,
+          "system_fpr": 0.05025810567832492,
+          "valid": false,
+          "backup_fn_count": 8771,
+          "backup_memory_bytes": 10509,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 43293,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.7,
+          "system_fpr": 0.04358795893509657,
+          "valid": false,
+          "backup_fn_count": 9836,
+          "backup_memory_bytes": 11785,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 44569,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.8,
+          "system_fpr": 0.036555304216692765,
+          "valid": false,
+          "backup_fn_count": 11246,
+          "backup_memory_bytes": 13475,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 46259,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.9,
+          "system_fpr": 0.028159619511629257,
+          "valid": false,
+          "backup_fn_count": 13438,
+          "backup_memory_bytes": 16101,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 48885,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.95,
+          "system_fpr": 0.022649498288962358,
+          "valid": false,
+          "backup_fn_count": 15601,
+          "backup_memory_bytes": 18693,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 51477,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.99,
+          "system_fpr": 0.015254335595383098,
+          "valid": false,
+          "backup_fn_count": 20728,
+          "backup_memory_bytes": 24835,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 57619,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        }
+      ],
+      "16384": [
+        {
+          "n_features": 16384,
+          "threshold": 0.5,
+          "system_fpr": 0.0257960675134853,
+          "valid": false,
+          "backup_fn_count": 2631,
+          "backup_memory_bytes": 3153,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 134241,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.6,
+          "system_fpr": 0.02206948552868163,
+          "valid": false,
+          "backup_fn_count": 3133,
+          "backup_memory_bytes": 3754,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 134842,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.7,
+          "system_fpr": 0.018183400034800765,
+          "valid": false,
+          "backup_fn_count": 3694,
+          "backup_memory_bytes": 4426,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 135514,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.8,
+          "system_fpr": 0.014601821240067281,
+          "valid": false,
+          "backup_fn_count": 4608,
+          "backup_memory_bytes": 5521,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 136609,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.9,
+          "system_fpr": 0.01045473000406009,
+          "valid": false,
+          "backup_fn_count": 6340,
+          "backup_memory_bytes": 7597,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 138685,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.95,
+          "system_fpr": 0.007815671944782785,
+          "valid": true,
+          "backup_fn_count": 8065,
+          "backup_memory_bytes": 9663,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 140751,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": -94.12859980139028
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.99,
+          "system_fpr": 0.004074589640972102,
+          "valid": true,
+          "backup_fn_count": 12291,
+          "backup_memory_bytes": 14727,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 145815,
+          "standard_memory_bytes": 72504,
+          "memory_reduction_percent": -101.11304203905993
+        }
+      ]
+    },
+    "0.05": {
+      "1024": [
+        {
+          "n_features": 1024,
+          "threshold": 0.5,
+          "system_fpr": 0.06780349167681689,
+          "valid": false,
+          "backup_fn_count": 22520,
+          "backup_memory_bytes": 26982,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 35190,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.6,
+          "system_fpr": 0.06310538831854301,
+          "valid": false,
+          "backup_fn_count": 23769,
+          "backup_memory_bytes": 28479,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 36687,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.7,
+          "system_fpr": 0.05818978017516385,
+          "valid": false,
+          "backup_fn_count": 25115,
+          "backup_memory_bytes": 30092,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 38300,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.8,
+          "system_fpr": 0.05317266979873557,
+          "valid": false,
+          "backup_fn_count": 26790,
+          "backup_memory_bytes": 32098,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 40306,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.9,
+          "system_fpr": 0.04686503103068267,
+          "valid": true,
+          "backup_fn_count": 29230,
+          "backup_memory_bytes": 35022,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 43230,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": 8.343050991201107
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.95,
+          "system_fpr": 0.041978423525317554,
+          "valid": true,
+          "backup_fn_count": 31414,
+          "backup_memory_bytes": 37639,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 45847,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": 2.794445033393411
+        },
+        {
+          "n_features": 1024,
+          "threshold": 0.99,
+          "system_fpr": 0.034438257641668114,
+          "valid": true,
+          "backup_fn_count": 35839,
+          "backup_memory_bytes": 42940,
+          "model_size_bytes": 8208,
+          "total_memory_bytes": 51148,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -8.44482137177993
+        }
+      ],
+      "2048": [
+        {
+          "n_features": 2048,
+          "threshold": 0.5,
+          "system_fpr": 0.06950002900063801,
+          "valid": false,
+          "backup_fn_count": 13440,
+          "backup_memory_bytes": 16103,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 32503,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.6,
+          "system_fpr": 0.0623803723681921,
+          "valid": false,
+          "backup_fn_count": 14634,
+          "backup_memory_bytes": 17534,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 33934,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.7,
+          "system_fpr": 0.05517371382170408,
+          "valid": false,
+          "backup_fn_count": 15998,
+          "backup_memory_bytes": 19168,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 35568,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.8,
+          "system_fpr": 0.04828606229337046,
+          "valid": true,
+          "backup_fn_count": 17646,
+          "backup_memory_bytes": 21143,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 37543,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": 20.4007208735291
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.9,
+          "system_fpr": 0.03991937822632098,
+          "valid": true,
+          "backup_fn_count": 20150,
+          "backup_memory_bytes": 24143,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 40543,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": 14.040072087352906
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.95,
+          "system_fpr": 0.034293254451597935,
+          "valid": true,
+          "backup_fn_count": 22540,
+          "backup_memory_bytes": 27006,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 43406,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": 7.96989292907877
+        },
+        {
+          "n_features": 2048,
+          "threshold": 0.99,
+          "system_fpr": 0.025738066237457224,
+          "valid": true,
+          "backup_fn_count": 27558,
+          "backup_memory_bytes": 33019,
+          "model_size_bytes": 16400,
+          "total_memory_bytes": 49419,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -4.778967454680383
+        }
+      ],
+      "4096": [
+        {
+          "n_features": 4096,
+          "threshold": 0.5,
+          "system_fpr": 0.057450263905805925,
+          "valid": false,
+          "backup_fn_count": 7900,
+          "backup_memory_bytes": 9466,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 42250,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.6,
+          "system_fpr": 0.05025810567832492,
+          "valid": false,
+          "backup_fn_count": 8771,
+          "backup_memory_bytes": 10509,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 43293,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": null
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.7,
+          "system_fpr": 0.04358795893509657,
+          "valid": true,
+          "backup_fn_count": 9836,
+          "backup_memory_bytes": 11785,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 44569,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": 5.504081416304462
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.8,
+          "system_fpr": 0.036555304216692765,
+          "valid": true,
+          "backup_fn_count": 11246,
+          "backup_memory_bytes": 13475,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 46259,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": 1.9209159334252046
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.9,
+          "system_fpr": 0.028159619511629257,
+          "valid": true,
+          "backup_fn_count": 13438,
+          "backup_memory_bytes": 16101,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 48885,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -3.646771970741014
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.95,
+          "system_fpr": 0.022649498288962358,
+          "valid": true,
+          "backup_fn_count": 15601,
+          "backup_memory_bytes": 18693,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 51477,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -9.142372521997233
+        },
+        {
+          "n_features": 4096,
+          "threshold": 0.99,
+          "system_fpr": 0.015254335595383098,
+          "valid": true,
+          "backup_fn_count": 20728,
+          "backup_memory_bytes": 24835,
+          "model_size_bytes": 32784,
+          "total_memory_bytes": 57619,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -22.164740803561966
+        }
+      ],
+      "16384": [
+        {
+          "n_features": 16384,
+          "threshold": 0.5,
+          "system_fpr": 0.0257960675134853,
+          "valid": true,
+          "backup_fn_count": 2631,
+          "backup_memory_bytes": 3153,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 134241,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -184.61995123502598
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.6,
+          "system_fpr": 0.02206948552868163,
+          "valid": true,
+          "backup_fn_count": 3133,
+          "backup_memory_bytes": 3754,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 134842,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -185.89420120852327
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.7,
+          "system_fpr": 0.018183400034800765,
+          "valid": true,
+          "backup_fn_count": 3694,
+          "backup_memory_bytes": 4426,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 135514,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -187.31898653662677
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.8,
+          "system_fpr": 0.014601821240067281,
+          "valid": true,
+          "backup_fn_count": 4608,
+          "backup_memory_bytes": 5521,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 136609,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -189.64062334358104
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.9,
+          "system_fpr": 0.01045473000406009,
+          "valid": true,
+          "backup_fn_count": 6340,
+          "backup_memory_bytes": 7597,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 138685,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -194.04219230361494
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.95,
+          "system_fpr": 0.007815671944782785,
+          "valid": true,
+          "backup_fn_count": 8065,
+          "backup_memory_bytes": 9663,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 140751,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -198.4225591010283
+        },
+        {
+          "n_features": 16384,
+          "threshold": 0.99,
+          "system_fpr": 0.004074589640972102,
+          "valid": true,
+          "backup_fn_count": 12291,
+          "backup_memory_bytes": 14727,
+          "model_size_bytes": 131088,
+          "total_memory_bytes": 145815,
+          "standard_memory_bytes": 47165,
+          "memory_reduction_percent": -209.1593342520937
+        }
+      ]
+    }
+  }
+}

@@ -46,38 +46,53 @@ double FusedTrigramScorer::score(const std::string &url) const
 
     double logit = intercept_;
     std::uint64_t trigram = trigram_hash(normalized, 0);
-    logit += weights_[static_cast<std::size_t>(trigram % n_features_)];
+    logit += weights_[static_cast<std::size_t>(trigram & (n_features_ - 1))] ; 
 
     for (std::size_t i = 3; i < normalized.size(); ++i)
     {
         trigram = rolling_update(trigram, static_cast<unsigned char>(normalized[i - 3]), static_cast<unsigned char>(normalized[i]));
-        logit += weights_[static_cast<std::size_t>(trigram % n_features_)];
+        logit += weights_[static_cast<std::size_t>(trigram & (n_features_ - 1))] ; 
     }
 
     return logit;
 }
 
-bool FusedTrigramScorer::predict(const std::string &url, double threshold) const
+bool FusedTrigramScorer::predict(const std::string &url, double /*threshold*/) const
 {
-    const double logit = score(url);
-    const double probability = 1.0 / (1.0 + std::exp(-logit));
-    return probability >= threshold;
-}
+    return score(url) >= 0.0;
+} 
 
 std::string FusedTrigramScorer::normalize_url(const std::string &url)
 {
-    std::string normalized = url;
-    normalized.erase(normalized.begin(), std::find_if(normalized.begin(), normalized.end(), [](unsigned char ch)
-                                                      { return !std::isspace(ch); }));
-    normalized.erase(std::find_if(normalized.rbegin(), normalized.rend(), [](unsigned char ch)
-                                  { return !std::isspace(ch); })
-                         .base(),
-                     normalized.end());
+    std::size_t start = 0;
+    while (start < url.size() &&
+           std::isspace(static_cast<unsigned char>(url[start])))
+    {
+        ++start;
+    }
 
-    std::transform(normalized.begin(), normalized.end(), normalized.begin(), [](unsigned char ch)
-                   { return static_cast<char>(std::tolower(ch)); });
+    std::size_t end = url.size();
+    while (end > start &&
+           std::isspace(static_cast<unsigned char>(url[end - 1])))
+    {
+        --end;
+    }
+
+    std::string normalized;
+    normalized.reserve(end - start);
+
+    for (std::size_t i = start; i < end; ++i)
+    {
+        unsigned char ch = static_cast<unsigned char>(url[i]);
+
+        if (ch >= 'A' && ch <= 'Z')
+            ch += ('a' - 'A');
+
+        normalized.push_back(static_cast<char>(ch));
+    }
+
     return normalized;
-}
+} 
 
 std::uint64_t FusedTrigramScorer::trigram_hash(const std::string &text, std::size_t start)
 {

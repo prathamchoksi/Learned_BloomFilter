@@ -1,0 +1,11 @@
+{
+  "n_features": 262144,
+  "analyzer": "char",
+  "ngram_range": [
+    3,
+    3
+  ],
+  "hash_scheme": "rolling_poly64",
+  "threshold": 0.5,
+  "feature_type": "char_trigram"
+}

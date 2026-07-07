@@ -1,0 +1,17 @@
+{
+  "name": "step_01_word_tokens",
+  "analyzer": "word",
+  "ngram_range": [
+    1,
+    1
+  ],
+  "n_features": 262144,
+  "accuracy": 0.9733033665108868,
+  "roc_auc": 0.992038908899885,
+  "avg_nnz_per_url": 6.4034,
+  "mean_latency_ns": 104640.405,
+  "p50_latency_ns": 99800.0,
+  "p95_latency_ns": 117700.0,
+  "qps": 9556.53793580023,
+  "num_queries": 20000
+}

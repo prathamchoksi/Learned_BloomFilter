@@ -1,0 +1,17 @@
+{
+  "implementation": "python",
+  "input": "data\\urldata.csv\\urldata.csv",
+  "model_dir": "results\\fused_model",
+  "train_size": 336371,
+  "test_size": 84093,
+  "accuracy": 0.9753368294626188,
+  "roc_auc": 0.9926486871375324,
+  "avg_nnz_per_url": 43.4238,
+  "mean_latency_ns": 28945.342,
+  "p50_latency_ns": 24000.0,
+  "p95_latency_ns": 59700.0,
+  "qps": 34547.873022194726,
+  "num_queries": 50000,
+  "threshold": 0.5,
+  "n_features": 262144
+}

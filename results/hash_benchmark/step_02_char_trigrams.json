@@ -1,0 +1,17 @@
+{
+  "name": "step_02_char_trigrams",
+  "analyzer": "char",
+  "ngram_range": [
+    3,
+    3
+  ],
+  "n_features": 262144,
+  "accuracy": 0.9757887101185592,
+  "roc_auc": 0.9928680191986103,
+  "avg_nnz_per_url": 43.4258,
+  "mean_latency_ns": 116322.72,
+  "p50_latency_ns": 110900.0,
+  "p95_latency_ns": 140100.0,
+  "qps": 8596.772840249952,
+  "num_queries": 20000
+}
