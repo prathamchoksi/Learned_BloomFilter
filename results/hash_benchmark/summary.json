@@ -14,10 +14,10 @@
       "accuracy": 0.9733033665108868,
       "roc_auc": 0.992038908899885,
       "avg_nnz_per_url": 6.4034,
-      "mean_latency_ns": 111238.345,
-      "p50_latency_ns": 96500.0,
-      "p95_latency_ns": 241300.0,
-      "qps": 8989.705842890777,
+      "mean_latency_ns": 101537.86,
+      "p50_latency_ns": 100100.0,
+      "p95_latency_ns": 177309.99999999985,
+      "qps": 9848.543193642254,
       "num_queries": 20000
     },
     {
@@ -31,10 +31,10 @@
       "accuracy": 0.9757887101185592,
       "roc_auc": 0.9928680191986103,
       "avg_nnz_per_url": 43.4258,
-      "mean_latency_ns": 113050.59,
-      "p50_latency_ns": 96300.0,
-      "p95_latency_ns": 227804.99999999994,
-      "qps": 8845.597356015569,
+      "mean_latency_ns": 139796.5,
+      "p50_latency_ns": 89400.0,
+      "p95_latency_ns": 342509.9999999999,
+      "qps": 7153.254909815339,
       "num_queries": 20000
     }
   ]
