@@ -1,5 +1,5 @@
 {
-  "n_features": 262144,
+  "n_features": 4096,
   "analyzer": "char",
   "ngram_range": [
     3,

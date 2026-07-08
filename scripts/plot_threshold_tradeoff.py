@@ -31,88 +31,173 @@ def mb(bytes_value: int) -> float:
 
 def main() -> None:
     args = parse_args()
+
     with args.input.open("r", encoding="utf-8") as f:
         report = json.load(f)
 
     thresholds = [float(x) for x in report["thresholds"]]
-    target_fpr = float(report["target_fpr"])
+    target_fprs = [float(x) for x in report["target_fprs"]]
     feature_grid = [int(x) for x in report["n_features"]]
-    results = report["results"]
 
-    plt.style.use("dark_background")
-    fig, axes = plt.subplots(1, 2, figsize=(16, 7), constrained_layout=False)
-    fig.patch.set_facecolor("#08142A")
-    for ax in axes:
-        ax.set_facecolor("#0A1735")
+    plt.style.use("default")
 
-    colors = ["#4FC3F7", "#6FF0C3", "#FFD54A", "#FF5B5B"]
+    fig, axes = plt.subplots(
+        2,
+        len(target_fprs),
+        figsize=(8 * len(target_fprs), 10),
+        constrained_layout=False,
+    )
+
+    fig.patch.set_facecolor("white")
+
+    for row in axes:
+        for ax in row:
+            ax.set_facecolor("white")
+
+    colors = [
+        "#4C72B0",
+        "#55A868",
+        "#C44E52",
+        "#8172B2",
+    ]
+
     labels = [f"n={n}" for n in feature_grid]
-    x = np.arange(len(thresholds))
 
-    left = axes[0]
-    for idx, n_features in enumerate(feature_grid):
-        series = results[str(n_features)]
-        system_fprs = [float(row["system_fpr"]) for row in series]
-        left.plot(
-            thresholds,
-            system_fprs,
-            marker="o",
-            linewidth=2.4,
-            markersize=5,
-            color=colors[idx % len(colors)],
-            label=labels[idx],
+    # --------------------------------------------------------
+    # Top row : System FPR
+    # --------------------------------------------------------
+
+    for col, target_fpr in enumerate(target_fprs):
+
+        results = report["results_by_target_fpr"][str(target_fpr)]
+
+        left = axes[0][col]
+
+        for idx, n_features in enumerate(feature_grid):
+
+            series = results[str(n_features)]
+
+            system_fprs = [
+                float(row["system_fpr"])
+                for row in series
+            ]
+
+            left.plot(
+                thresholds,
+                system_fprs,
+                marker="o",
+                linewidth=2.5,
+                markersize=6,
+                color=colors[idx % len(colors)],
+                label=labels[idx],
+            )
+
+        left.axhline(
+            target_fpr,
+            color="black",
+            linestyle="--",
+            linewidth=1.5,
+            label=f"Target = {target_fpr:g}",
         )
 
-    left.axhline(target_fpr, color="#FF6B6B", linestyle="--", linewidth=1.4, label=f"Target FPR = {target_fpr:g}")
-    left.set_title(f"Threshold vs System FPR\n(C++ Trigram, Target FPR = {target_fpr:g})", fontsize=14, fontweight="bold")
-    left.set_xlabel("Classification Threshold", fontsize=11)
-    left.set_ylabel("System FPR", fontsize=11)
-    left.set_xticks(thresholds)
-    left.set_ylim(bottom=0)
-    left.grid(True, linestyle="--", alpha=0.15)
-    left.legend(framealpha=0.22, fontsize=9)
-
-    right = axes[1]
-    for idx, n_features in enumerate(feature_grid):
-        series = results[str(n_features)]
-        backup_counts = [int(row["backup_fn_count"]) for row in series]
-        right.plot(
-            thresholds,
-            backup_counts,
-            marker="o",
-            linewidth=2.4,
-            markersize=5,
-            color=colors[idx % len(colors)],
-            label=labels[idx],
+        left.set_title(
+            f"System False Positive Rate\n(Target FPR = {target_fpr:g})",
+            fontsize=13,
+            fontweight="bold",
         )
 
-    right.set_title(f"Threshold vs Backup BF Size\n(C++ Trigram, Target FPR = {target_fpr:g})", fontsize=14, fontweight="bold")
-    right.set_xlabel("Classification Threshold", fontsize=11)
-    right.set_ylabel("Training FN Count (backup BF size)", fontsize=11)
-    right.set_xticks(thresholds)
-    right.grid(True, linestyle="--", alpha=0.15)
-    right.legend(framealpha=0.22, fontsize=9)
+        left.set_xlabel("Classification Threshold")
+        left.set_ylabel("System False Positive Rate")
+
+        left.set_xticks(thresholds)
+        left.set_ylim(bottom=0)
+
+        left.grid(
+            True,
+            linestyle="--",
+            alpha=0.30,
+        )
+
+        left.legend(fontsize=9)
+
+    # --------------------------------------------------------
+    # Bottom row : Backup BF
+    # --------------------------------------------------------
+
+    for col, target_fpr in enumerate(target_fprs):
+
+        results = report["results_by_target_fpr"][str(target_fpr)]
+
+        right = axes[1][col]
+
+        for idx, n_features in enumerate(feature_grid):
+
+            series = results[str(n_features)]
+
+            backup_counts = [
+                int(row["backup_fn_count"])
+                for row in series
+            ]
+
+            right.plot(
+                thresholds,
+                backup_counts,
+                marker="o",
+                linewidth=2.5,
+                markersize=6,
+                color=colors[idx % len(colors)],
+                label=labels[idx],
+            )
+
+        right.set_title(
+            f"Backup Bloom Filter Size\n(Target FPR = {target_fpr:g})",
+            fontsize=13,
+            fontweight="bold",
+        )
+
+        right.set_xlabel("Classification Threshold")
+        right.set_ylabel("Backup Bloom Filter Entries")
+
+        right.set_xticks(thresholds)
+
+        right.grid(
+            True,
+            linestyle="--",
+            alpha=0.30,
+        )
+
+        right.legend(fontsize=9)
 
     fig.suptitle(
-        "Threshold Tradeoff - Lower FPR Requires Higher Threshold -> Larger Backup BF",
-        fontsize=16,
+        "Threshold Trade-off Analysis Across Target False Positive Rates",
+        fontsize=18,
         fontweight="bold",
-        y=0.98,
     )
+
     fig.text(
         0.5,
         0.02,
-        "Higher threshold pushes more good URLs into the backup BF, increasing memory cost",
+        "Increasing the classification threshold reduces system false positive rate but increases the size of the backup Bloom Filter.",
         ha="center",
-        va="bottom",
         fontsize=10,
-        color="#9AB0D0",
+        color="dimgray",
     )
-    fig.tight_layout(rect=[0, 0.05, 1, 0.95])
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(args.output, dpi=220)
+
+    fig.tight_layout(rect=[0, 0.05, 1, 0.96])
+
+    args.output.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    fig.savefig(
+        args.output,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
     print(f"Wrote threshold tradeoff chart to: {args.output}")
 
 
 if __name__ == "__main__":
-    main()
+    main() 

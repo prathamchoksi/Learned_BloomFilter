@@ -9,9 +9,9 @@
   "accuracy": 0.9757887101185592,
   "roc_auc": 0.9928680191986103,
   "avg_nnz_per_url": 43.4258,
-  "mean_latency_ns": 116322.72,
-  "p50_latency_ns": 110900.0,
-  "p95_latency_ns": 140100.0,
-  "qps": 8596.772840249952,
+  "mean_latency_ns": 113050.59,
+  "p50_latency_ns": 96300.0,
+  "p95_latency_ns": 227804.99999999994,
+  "qps": 8845.597356015569,
   "num_queries": 20000
 }

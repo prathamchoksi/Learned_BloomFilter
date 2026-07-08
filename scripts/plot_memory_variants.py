@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import json
 from pathlib import Path
@@ -7,7 +9,9 @@ import numpy as np
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Plot memory usage variants vs standard Bloom filter")
+    parser = argparse.ArgumentParser(
+        description="Plot memory usage variants vs standard Bloom filter"
+    )
     parser.add_argument(
         "--input",
         type=Path,
@@ -24,11 +28,12 @@ def parse_args() -> argparse.Namespace:
 
 
 def mb_from_bytes(num_bytes: int) -> float:
-    return float(num_bytes / (1024 * 1024))
+    return num_bytes / (1024 * 1024)
 
 
 def main() -> None:
     args = parse_args()
+
     with args.input.open("r", encoding="utf-8") as f:
         summary = json.load(f)
 
@@ -36,71 +41,128 @@ def main() -> None:
     results = summary["results_by_target_fpr"]
 
     variant_order = [
-        ("cpp_trigram", "C++ Trigram", "#49A3D1"),
-        ("char_trigram_python", "Char Trigram (Python)", "#5CC696"),
-        ("word_default_python", "Word Default (Python)", "#D4B53E"),
+        ("cpp_trigram", "C++ Trigram", "#4C72B0"),
+        ("char_trigram_python", "Char Trigram (Python)", "#55A868"),
+        ("word_default_python", "Word Default (Python)", "#C44E52"),
     ]
 
-    standard_mb = [mb_from_bytes(results[str(t)]["standard_bloom"]["memory_bytes"]) for t in target_fprs]
+    standard_mb = [
+        mb_from_bytes(results[str(t)]["standard_bloom"]["memory_bytes"])
+        for t in target_fprs
+    ]
+
     variant_mb = {
-        key: [mb_from_bytes(results[str(t)]["best_variants"][key]["total_memory_bytes"]) for t in target_fprs]
-        for key, _, _ in variant_order
-    }
-    reductions = {
-        key: [results[str(t)]["best_variants"][key]["memory_reduction_percent"] for t in target_fprs]
+        key: [
+            mb_from_bytes(
+                results[str(t)]["best_variants"][key]["total_memory_bytes"]
+            )
+            for t in target_fprs
+        ]
         for key, _, _ in variant_order
     }
 
-    plt.style.use("dark_background")
+    reductions = {
+        key: [
+            results[str(t)]["best_variants"][key]["memory_reduction_percent"]
+            for t in target_fprs
+        ]
+        for key, _, _ in variant_order
+    }
+
+    plt.style.use("default")
+
     fig, ax = plt.subplots(figsize=(12.8, 6.6))
-    fig.patch.set_facecolor("#08142A")
-    ax.set_facecolor("#0A1735")
+
+    fig.patch.set_facecolor("white")
+    ax.set_facecolor("white")
 
     x = np.arange(len(target_fprs))
-    width = 0.20
+    width = 0.22
 
     for idx, (key, label, color) in enumerate(variant_order):
+
         offset = (idx - 1) * width
-        bars = ax.bar(x + offset, variant_mb[key], width=width, color=color, label=label)
+
+        bars = ax.bar(
+            x + offset,
+            variant_mb[key],
+            width=width,
+            color=color,
+            label=label,
+        )
+
         for bar, red in zip(bars, reductions[key]):
             ax.text(
                 bar.get_x() + bar.get_width() / 2,
-                bar.get_height() + 0.005,
-                f"-{red:.0f}%",
+                bar.get_height() + 0.002,
+                f"{red:.0f}%",
                 ha="center",
                 va="bottom",
                 fontsize=9,
-                color=color,
                 fontweight="bold",
             )
 
     ax.plot(
         x,
         standard_mb,
-        color="#FF5C5C",
+        color="black",
         marker="o",
         linestyle="--",
         linewidth=2.2,
-        label="Standard BF",
+        label="Standard Bloom Filter",
     )
 
     labels = [f"Target FPR\n{t:g}" for t in target_fprs]
+
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=11)
-    ax.set_ylabel("Total Memory (MB)", fontsize=12)
-    ax.set_title("Memory Usage - Learned BF vs Standard BF", fontsize=17, fontweight="bold", pad=12)
-    ax.grid(axis="y", linestyle="--", alpha=0.2)
+
+    ax.set_ylabel("Memory (MB)", fontsize=12)
+
+    ax.set_title(
+        "Memory Usage Comparison Across Learned Bloom Filter Variants",
+        fontsize=17,
+        fontweight="bold",
+        pad=12,
+    )
+
+    ax.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.30,
+    )
+
     ax.set_axisbelow(True)
-    ax.legend(loc="upper right", framealpha=0.25)
 
-    note = "Percentage labels show reduction vs Standard BF. Dashed red line = Standard BF memory."
-    ax.text(0.5, -0.15, note, transform=ax.transAxes, ha="center", va="top", fontsize=10, color="#8EA3C2")
+    ax.legend(
+        loc="upper right",
+        fontsize=10,
+    )
 
-    fig.tight_layout()
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(args.output, dpi=220)
+    fig.text(
+        0.5,
+        0.02,
+        "Percentage labels indicate memory reduction relative to the Standard Bloom Filter.",
+        ha="center",
+        fontsize=10,
+        color="dimgray",
+    )
+
+    fig.tight_layout(rect=[0, 0.05, 1, 0.96])
+
+    args.output.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    fig.savefig(
+        args.output,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
     print(f"Wrote memory usage chart to: {args.output}")
 
 
 if __name__ == "__main__":
-    main()
+    main() 

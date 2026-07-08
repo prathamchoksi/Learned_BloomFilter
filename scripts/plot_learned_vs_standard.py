@@ -25,11 +25,14 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+
     with args.input.open("r", encoding="utf-8") as f:
         report = json.load(f)
 
     methods = ["Standard\nBloom Filter", "Learned\nBloom Filter"]
-    colors = ["#2f6fed", "#ff6b35"]
+
+    # Light theme colors
+    colors = ["steelblue", "darkorange"]
 
     standard = report["standard_bloom"]
     learned = report["learned_bloom"]
@@ -39,44 +42,115 @@ def main() -> None:
     memory_values = [standard["memory_bytes"], learned["total_memory_bytes"]]
     qps_values = [standard["qps"], learned["qps"]]
 
-    fig, axes = plt.subplots(2, 2, figsize=(13, 9))
-    fig.suptitle("Learned Bloom Filter vs Standard Bloom Filter", fontsize=14, fontweight="bold")
+    plt.style.use("default")
 
+    fig, axes = plt.subplots(2, 2, figsize=(13, 9))
+
+    fig.patch.set_facecolor("white")
+
+    for row in axes:
+        for ax in row:
+            ax.set_facecolor("white")
+
+    fig.suptitle(
+        "Learned Bloom Filter vs Standard Bloom Filter",
+        fontsize=16,
+        fontweight="bold",
+    )
+
+    # ---------------- Memory ----------------
     ax = axes[0, 0]
+
     bars = ax.bar(methods, memory_values, color=colors)
-    ax.set_title("Memory Footprint (bytes)")
+
+    ax.set_title("Memory Footprint")
     ax.set_ylabel("Memory (bytes)")
     ax.set_yscale("log")
+    ax.grid(True, linestyle="--", alpha=0.3)
+    ax.set_axisbelow(True)
+
     for bar, val in zip(bars, memory_values):
-        ax.text(bar.get_x() + bar.get_width() / 2, val, f"{val:,.0f}", ha="center", va="bottom", fontsize=9)
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            val,
+            f"{val:,.0f}",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+            fontweight="bold",
+        )
 
+    # ---------------- FPR ----------------
     ax = axes[0, 1]
+
     bars = ax.bar(methods, fpr_values, color=colors)
-    ax.set_title("False Positive Rate (measured)")
+
+    ax.set_title("False Positive Rate")
     ax.set_ylabel("FPR")
+    ax.grid(True, linestyle="--", alpha=0.3)
+    ax.set_axisbelow(True)
+
     for bar, val in zip(bars, fpr_values):
-        ax.text(bar.get_x() + bar.get_width() / 2, val, f"{val:.6f}", ha="center", va="bottom", fontsize=9)
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            val,
+            f"{val:.5f}",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+            fontweight="bold",
+        )
 
+    # ---------------- Latency ----------------
     ax = axes[1, 0]
+
     bars = ax.bar(methods, latency_values, color=colors)
-    ax.set_title("Query Latency (ns)")
+
+    ax.set_title("Query Latency")
     ax.set_ylabel("Latency (ns)")
+    ax.grid(True, linestyle="--", alpha=0.3)
+    ax.set_axisbelow(True)
+
     for bar, val in zip(bars, latency_values):
-        ax.text(bar.get_x() + bar.get_width() / 2, val, f"{val:.0f}", ha="center", va="bottom", fontsize=9)
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            val,
+            f"{val:.0f}",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+            fontweight="bold",
+        )
 
+    # ---------------- Throughput ----------------
     ax = axes[1, 1]
-    bars = ax.bar(methods, qps_values, color=colors)
-    ax.set_title("Throughput (QPS)")
-    ax.set_ylabel("QPS")
-    for bar, val in zip(bars, qps_values):
-        ax.text(bar.get_x() + bar.get_width() / 2, val, f"{val:.0f}", ha="center", va="bottom", fontsize=9)
 
-    fig.tight_layout()
+    bars = ax.bar(methods, qps_values, color=colors)
+
+    ax.set_title("Throughput")
+    ax.set_ylabel("Queries / Second")
+    ax.grid(True, linestyle="--", alpha=0.3)
+    ax.set_axisbelow(True)
+
+    for bar, val in zip(bars, qps_values):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            val,
+            f"{val:,.0f}",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+            fontweight="bold",
+        )
+
+    fig.tight_layout(rect=[0, 0.03, 1, 0.96])
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(args.output, dpi=180)
+    fig.savefig(args.output, dpi=220)
+
     print(f"Wrote comparison plot to: {args.output}")
 
-    print(f"\nKey Metrics:")
+    print("\nKey Metrics:")
     print(f"Standard BF memory: {standard['memory_bytes']:,} bytes")
     print(f"Learned BF memory: {learned['total_memory_bytes']:,} bytes")
     print(f"  - Model size: {learned['model_memory_bytes']:,} bytes")
@@ -89,4 +163,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    main() 

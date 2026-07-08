@@ -41,7 +41,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--n-features",
         type=int,
-        default=2**18,
+        default=2**12,
         help="Number of hashed trigram features",
     )
     parser.add_argument(
@@ -122,7 +122,7 @@ def main() -> None:
         "weights_path": str(weights_path),
         "metadata_path": str(metadata_path),
         "threshold": args.threshold,
-        "n_features": args.n_features,
+        "n_features": args.n_features
     }
     with (args.output_dir / "summary.json").open("w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)

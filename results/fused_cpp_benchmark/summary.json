@@ -4,14 +4,14 @@
   "model_dir": "results\\fused_model",
   "train_size": 336371,
   "test_size": 84093,
-  "accuracy": 0.9753368294626188,
-  "roc_auc": 0.9926488491147889,
-  "avg_nnz_per_url": 43.4238,
-  "mean_latency_ns": 1150.508,
-  "p50_latency_ns": 1000.0,
-  "p95_latency_ns": 1600.0,
-  "qps": 869181.2660146648,
+  "accuracy": 0.9271758648163343,
+  "roc_auc": 0.9644441821946403,
+  "avg_nnz_per_url": 43.1222,
+  "mean_latency_ns": 655.982,
+  "p50_latency_ns": 500.0,
+  "p95_latency_ns": 1400.0,
+  "qps": 1524432.0728312668,
   "num_queries": 50000,
   "threshold": 0.5,
-  "n_features": 262144
+  "n_features": 4096
 }

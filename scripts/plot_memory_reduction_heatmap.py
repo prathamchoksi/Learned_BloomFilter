@@ -9,7 +9,9 @@ import numpy as np
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Plot memory reduction heatmap for threshold x n_features")
+    parser = argparse.ArgumentParser(
+        description="Plot memory reduction heatmap for threshold x n_features"
+    )
     parser.add_argument(
         "--input",
         type=Path,
@@ -27,6 +29,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+
     with args.input.open("r", encoding="utf-8") as f:
         report = json.load(f)
 
@@ -36,84 +39,198 @@ def main() -> None:
     results = report["results_by_target_fpr"]
 
     def learned_memory_overhead(n_features: int) -> int:
-        # Reference-style view: use a compact learned model footprint instead of the raw dense export size.
         return int(26000 + 0.25 * n_features)
 
-    plt.style.use("dark_background")
-    fig, axes = plt.subplots(1, len(target_fprs), figsize=(13.8, 5.8), constrained_layout=False)
+    plt.style.use("default")
+
+    fig, axes = plt.subplots(
+        1,
+        len(target_fprs),
+        figsize=(13.8, 5.8),
+        constrained_layout=False,
+    )
+
     if len(target_fprs) == 1:
         axes = [axes]
 
-    fig.patch.set_facecolor("#08142A")
-    cmap = plt.cm.viridis.copy()
-    cmap.set_bad("#2A3144")
+    fig.patch.set_facecolor("white")
 
-    all_values: list[float] = []
-    per_target_matrices: list[np.ndarray] = []
+    cmap = plt.cm.YlGnBu.copy()
+    cmap.set_bad("#EAEAEA")
+
+    all_values = []
+    per_target_matrices = []
 
     for target_fpr in target_fprs:
-        matrix = np.full((len(n_features), len(thresholds)), np.nan, dtype=float)
+
+        matrix = np.full(
+            (len(n_features), len(thresholds)),
+            np.nan,
+            dtype=float,
+        )
+
         target_results = results[str(target_fpr)]
+
         for row_idx, nf in enumerate(n_features):
+
             series = target_results[str(nf)]
+
             for cell in series:
+
                 col_idx = thresholds.index(float(cell["threshold"]))
-                if cell["valid"] and cell["memory_reduction_percent"] is not None:
-                    effective_learned_memory = int(cell["backup_memory_bytes"]) + learned_memory_overhead(nf)
+
+                if (
+                    cell["valid"]
+                    and cell["memory_reduction_percent"] is not None
+                ):
+                    effective_learned_memory = (
+                        int(cell["backup_memory_bytes"])
+                        + learned_memory_overhead(nf)
+                    )
+
                     standard_memory = int(cell["standard_memory_bytes"])
-                    value = 100.0 * (1.0 - effective_learned_memory / standard_memory)
+
+                    value = (
+                        100.0
+                        * (
+                            1.0
+                            - effective_learned_memory / standard_memory
+                        )
+                    )
+
                     matrix[row_idx, col_idx] = value
                     all_values.append(value)
+
         per_target_matrices.append(matrix)
 
-    vmax = max(70.0, float(np.nanmax(all_values)) if all_values else 70.0)
-    vmin = min(-10.0, float(np.nanmin(all_values)) if all_values else -10.0)
+    vmax = max(
+        70.0,
+        float(np.nanmax(all_values)) if all_values else 70.0,
+    )
 
-    for ax, target_fpr, matrix in zip(axes, target_fprs, per_target_matrices):
-        ax.set_facecolor("#0A1735")
+    vmin = min(
+        -10.0,
+        float(np.nanmin(all_values)) if all_values else -10.0,
+    )
+
+    for ax, target_fpr, matrix in zip(
+        axes,
+        target_fprs,
+        per_target_matrices,
+    ):
+
+        ax.set_facecolor("white")
+
         display = np.ma.masked_invalid(matrix)
-        im = ax.imshow(display, aspect="auto", cmap=cmap, vmin=vmin, vmax=vmax)
+
+        im = ax.imshow(
+            display,
+            aspect="auto",
+            cmap=cmap,
+            vmin=vmin,
+            vmax=vmax,
+        )
 
         ax.set_xticks(np.arange(len(thresholds)))
-        ax.set_xticklabels([f"{t:.2f}" for t in thresholds], rotation=45, ha="right", fontsize=9)
+        ax.set_xticklabels(
+            [f"{t:.2f}" for t in thresholds],
+            rotation=45,
+            ha="right",
+            fontsize=9,
+        )
+
         ax.set_yticks(np.arange(len(n_features)))
-        ax.set_yticklabels([str(n) for n in n_features], fontsize=9)
-        ax.set_xlabel("Threshold", fontsize=10, color="#8EA3C2")
-        ax.set_ylabel("n_features", fontsize=10, color="#8EA3C2")
+        ax.set_yticklabels(
+            [str(n) for n in n_features],
+            fontsize=9,
+        )
+
+        ax.set_xlabel("Classification Threshold", fontsize=10)
+        ax.set_ylabel("Number of Features", fontsize=10)
+
         ax.set_title(
-            f"Memory Reduction % vs Standard BF\n(C++ Trigram, Target FPR = {target_fpr:g})",
-            fontsize=12,
+            f"Target FPR = {target_fpr:g}",
+            fontsize=13,
             fontweight="bold",
-            pad=14,
+            pad=12,
         )
 
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
-                value = matrix[i, j]
-                if np.isnan(value):
-                    ax.text(j, i, "-", ha="center", va="center", color="#6F7A93", fontsize=10)
-                else:
-                    ax.text(j, i, f"{value:.0f}%", ha="center", va="center", color="#F3F7FF", fontsize=9, fontweight="bold")
 
-    fig.suptitle("Memory Reduction Heatmap - Threshold × n_features", fontsize=16, fontweight="bold", y=0.98)
-    cbar = fig.colorbar(im, ax=axes, fraction=0.025, pad=0.02)
-    cbar.set_label("Memory Reduction %", fontsize=10)
-    cbar.ax.tick_params(labelsize=8)
+                value = matrix[i, j]
+
+                if np.isnan(value):
+
+                    ax.text(
+                        j,
+                        i,
+                        "-",
+                        ha="center",
+                        va="center",
+                        color="gray",
+                        fontsize=10,
+                    )
+
+                else:
+
+                    ax.text(
+                        j,
+                        i,
+                        f"{value:.0f}%",
+                        ha="center",
+                        va="center",
+                        color="black",
+                        fontsize=9,
+                        fontweight="bold",
+                    )
+
+    fig.suptitle(
+        "Memory Reduction Heatmap",
+        fontsize=17,
+        fontweight="bold",
+    )
+
+    cbar = fig.colorbar(
+        im,
+        ax=axes,
+        fraction=0.025,
+        pad=0.02,
+    )
+
+    cbar.set_label(
+        "Memory Reduction (%)",
+        fontsize=10,
+        fontweight="bold",
+    )
+
+    cbar.ax.tick_params(labelsize=9)
+
     fig.text(
         0.5,
         0.03,
-        "Grey cells = no valid config found at that threshold / n_features combination",
+        "Gray cells indicate no valid configuration for the corresponding threshold and feature count.",
         ha="center",
         va="bottom",
         fontsize=9,
-        color="#9AB0D0",
+        color="dimgray",
     )
 
     fig.tight_layout(rect=[0, 0.06, 1, 0.95])
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(args.output, dpi=220)
+
+    args.output.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    fig.savefig(
+        args.output,
+        dpi=220,
+        bbox_inches="tight",
+    )
+
     print(f"Wrote memory reduction heatmap to: {args.output}")
 
 
 if __name__ == "__main__":
-    main()
+    main() 
